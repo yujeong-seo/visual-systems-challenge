@@ -1,5 +1,5 @@
 # Lab 6 - Feature Matching and Classification
-*Yujeong Seo, Gabriela Lee, 12 March 2026_*
+*Yujeong Seo, Gabriela Lee, 20 March 2026*
 
 This laboratory session is designed to support the contents of Lectures 10 and 11 of the module.  
 
