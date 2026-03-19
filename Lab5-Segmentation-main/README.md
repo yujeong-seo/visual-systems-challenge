@@ -1,5 +1,5 @@
 # Lab 5 - Segmentation and Feature Detection
-*_Peter Cheung, version 1.2, 19 Feb 2026_*
+*_Yujeong Seo, Gabriela Lee, 19 March 2026_*
 
 
 In this laboratory session, you will explore techniques to identify features and regions in an image. As before, clone this repository to your laptop and keep your experimental logbook on your repo.  
@@ -573,9 +573,6 @@ You are not required to complete all challenges.  Do as many as you can given th
    **bwconncomp fails because it operates on connected white pixel regions. imfill function cannot correctly isolate individual match regions because some of the edge boundaries are not completely enclosed. Hence, watershed segmentation was used instead to address this issue. However, watershed segmentation works well when objects are rounded and convex instead of long and thin shapes such as matches. When distance transform is performed, it produces a ridge line running along the length of the match, and incorrectly splitting one single match into multiple fragments. As the matches overlap, the distance transform creates an irregular saddle point and false dividing lines are created. Hough Transform is then used and produced the closest result (it counted 16 matches). However, due to the varying length nature of matches, the variable MinLength threshold that is high enough to suppress noise will disregard the shorter matches, whilst lowering it increase false detections.** 
    <p align="center"> <img src="assets/fillfail.jpg" /> </p>
    <p align="center"> <img src="assets/hough_fail.jpg" /> </p>
-
-   To solve this, the endpoints rather than the bodies of the matches were counted. Since every matchstick, no matter how long it is and how it overlaps with others would have exactly two ends. 
-
 
 2. The file **_'assets/f14.png'_** is an image of the F14 fighter jet.  Produce a binary image where only the fighter jet is shown as white and the rest of the image is black.
    **The f14 image is a grayscale image where the jet and the background share similar grayscale intensities which makes Otsu's method and k-means clustering difficult. They will inevitably group the lighter parts of the jet with the background. Since we can't separate the jet by its brightness, we use edge detection method to identify its boundary. As seen in the image below, Canny detector detects the most continuous and detailed edges, so it is used instead of Sobel and LoG.**
