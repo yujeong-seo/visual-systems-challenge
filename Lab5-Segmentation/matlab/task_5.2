@@ -1,0 +1,14 @@
+clear all; close all;
+f = imread('assets/peppers.png');    
+[M, N, S] = size(f);                  % find image size
+F = reshape(f, [M*N S]);            % resize as 1D array of 3 colours
+% Separate the three colour channels 
+R = F(:,1); G = F(:,2); B = F(:,3);
+C = double(F)/255;          % convert to double data type for plotting
+figure(1)
+scatter3(R, G, B, 1, C);    % scatter plot each pixel as colour dot
+xlabel('RED', 'FontSize', 14);
+ylabel('GREEN', 'FontSize', 14);
+zlabel('BLUE', 'FontSize', 14);
+title('Pixel colour in feature vector [R G B]');
+
