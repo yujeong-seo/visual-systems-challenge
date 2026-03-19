@@ -257,6 +257,12 @@ title({char(label), num2str(max(score),2)}); % label object
 >
 > Modify this code so that you capture and recognize object in a continous loop.
 
+**_Example outputs from the webcam detection:_**
+<p align="center"> <img src="images/task6-1.png" /> </p>
+<p align="center"> <img src="images/task6-2.png" /> </p>
+<p align="center"> <img src="images/task6-3.png" /> </p>
+
+
 You may also want to read and explore these online documents that accompany Matlab:
 
 [Deep learning in Matlab](https://uk.mathworks.com/help/deeplearning/ug/deep-learning-in-matlab.html)
