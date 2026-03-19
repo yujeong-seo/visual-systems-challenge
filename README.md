@@ -59,7 +59,7 @@ The left image demonstrates the ability to suppress the light background noise a
 
 **Image correction:**
 * Handles card rotation in any orientation wihtout manual input
-* 🔺 Limitation on severely angled photographs. Attempt on homography extension as shown below, to be automatically applied when initial card detection fails. However, it generates unstable result, or misidentifies the card due to distorted ratio.
+* ‼️ Limitation on severely angled photographs. Attempt on homography extension as shown below, to be automatically applied when initial card detection fails. However, it generates unstable result, or misidentifies the card due to distorted ratio.
 
 | Homography Attempt 1        | Homography Attempt 2      | 
 | :---:             | :---:             | 
@@ -68,7 +68,7 @@ The left image demonstrates the ability to suppress the light background noise a
 
 **Environment dependencies:**
 * Reliably detects a credit card and measures the object under controlled conditions: assumes well-lit image with clear background
-* However, the performance would degrade on noisy, dark, or low-contrast backgrounds as Otsu's method might fail to separate objects cleanly
+* ‼️ However, the performance would degrade on noisy, dark, or low-contrast backgrounds as Otsu's method might fail to separate objects cleanly
 
 
 ### Feature 2 Evaluation
