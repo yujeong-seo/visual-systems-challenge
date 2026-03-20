@@ -33,23 +33,23 @@ Full iterative processes can be accessed in `/Challenges/test` folder.
 
 ### Feature 2: Artify Photographs
 
-This program allows users to upload any standard image and artify it into three distinct styles: Comic Book, Pointillism, and Stained Glass. It allows us to explore how design and technology intersect.
+This program allows users to explore digital image processing and art interactively. It transforms standard images into three artistic styles: Comic Book, Pointillism, and Stained Glass. 
 
-**Preprocessing**
-Before any artistic style is applied, some pre-processing and analysis are performed. To reduce noise, imguided filter is applied to smooth the image whilst preserving edge structures. For example in the surfboard image, the texture is grainy so the smoothing filter helps reduce the noise. To make the results more similar to real-life painting, K-means clustering helps identify the main theme colours, since paint colours are barely exactly the same as pixels. 
-
-To make the application more interactive, a dynamic palette was implemented. By clicking on a specific color in the main theme section, the image will be converted into a grayscale (rgb2gray + imadjust) image and only keep the selected cluster's pixels in colour. 
+**User Flow**
+1. Upload any standard image file
+2. The system automatically extracts a color theme palette using K-means clustering. You can set the number of clusters (5, 7, or 10) to control the level of color abstraction
+3. Choose the art style from the dropdown menu
+4. Use the slider to control style-specific details like stroke thickness, dot size, or shard density
+5. Click any swatch in the generated color palette to render the image in grayscale except for the chosen color cluster 
 
 **📔 Comic Book Style**
-The Comic Book Style focuses on bold colours and heavy ink outlines. Canny edge detection is used to detect the outlines. To prevent the lines being too noisy and only focus on main outlines, the default threshold is manually adjusted (strictThresh = defaultThres * 2.5). Morphological opening (bwareaopen) is then applied to simulate hand-drawn ink and dilation (imdilate) with a disk-shapred structuring element to give the lines variable thickness based on user input. These outlines are then converted to pure black. 
+This style focuses on bold colours and heavy outlines. To achieve this, the system converts the image to grayscale and applies Canny edge detection. To simulate a hand-drawn aesthetic, morphological opening (bwareaopen) is applied to remove noise and stray pixels and dilation (imdilate) with a disk-shapred structuring element thicken the detected edges based on the user-defined thickness parameter. These outlines are then converted to pure black and overlaid onto the color-quantised image. 
 
 **🟡 Pointillism Style**
-The Pointillism style is one of the most famous style from the Neo-Impressionism movement. It paints with distinct dots. So this style renders the image as a series of distinct dots (120, 000). The dots are placed randomly (randi) and their colors are added a slight random shift (colorShift). The color dots have varying sizes in a specific ratio (5:3:2) to simulate a real artistic switching between large background brushes and fine detail brushes. 
+The Pointillism style is inspired by the Neo-Impressionism movement, it replaces continuous gradients with a dense field of ~120 000 distinct dots. To avoid a rigid "computer-generated" look, dot locations are randomised using randi and colors are subjected to a slight colorShift. Color dots are painted with varying sizes (5:3:2 size ratio) to simulate an artist's transition between broard background strokes and fine detail strokes.
 
 **🪟 Voronoi Stained Glass Style**
-The Voronoi Stained Glass style features coloured glass pieces arranged in patterns. Voronoi tessellation is used to divide a space into region based on distance to a specific group of seeds. "Seeds" are scattered across the image and the bwdist (Distance Transform) function is used to compute which seed is closest to every pixel and divides the image into clean, geometric polygons.
-
-Since it is computationally expensive to calculate millions of distances, the image is scaled down to a maxDim of 1000 pixelss for the Voronoi math, and it is scaled back up using imresize with the nearest neighbor setting. Since real glass has some physical imperfection, circshift function is used to slightly offset the shards. The polygon boundaries are detected and a charcoal-colored dilation is applied to thicken these edges so they look like the lead strips that seperate pieces of stained glass.
+The Voronoi stained glass style features coloured glass pieces arranged in patterns using Voronoi tessellation. It divides the image into regions based on proximity to "seed" points. Calculating millions of Euclidean distances is computationally expensive, so the original image  is scaled down to a maxDim of 1000 pixelss for the Voronoi math, and scales back up using imresize with the nearest neighbor interpolation. The polygon boundaries are detected and a charcoal-colored dilation is applied to thicken them so they look like the lead strips that seperate pieces of stained glass.
 
 
 
@@ -69,12 +69,35 @@ Since it is computationally expensive to calculate millions of distances, the im
 The left image demonstrates the ability to suppress the light background noise and detect the card and the object. The right image demonstrates the **multi-object detection** and the ability to **handle the rotation**. More than one non-card objects are inspected using tabs on the right panel.
 
 
-| Example 1        | Example 2         | Example 3      | 
+|  Surfboard in Comic Style       | Surfboard in Pointillism         | Surfboard in Glass Style     | 
 | :---:             | :---:             | :---:            |
 |![example-1](images/comic_result.png) | ![example-2](images/point_result.png)|
 [example-3](images/glass_result.png) |
 
-Different type of images are tested to see its ability to transform the art style. The final image depends on 
+|  City View in Comic Style       | City View in Pointillism         | City View in Glass Style     | 
+| :---:             | :---:             | :---:            |
+|![example-1](images/city_comic.png) | ![example-2](images/city_dots.png)|
+[example-3](images/city_glass.png) |
+
+<p align="center"> <img src="images/portrait_dots.png" /> </p>
+
+Different type of images are tested to see its ability to transform the art style.
+
+|  Surfboard in Comic Style with stroke thickness = 2       |  Surfboard in Comic Style with stroke thickness = 7          | Surfboard in Pointillism Style with dot size = 2     | Surfboard in Pointillism Style with dot size = 8      |
+| :---:             | :---:             | :---:            |
+|![example-1](images/comic_result.png) | ![example-2](images/comic_thick.png)|
+[example-3](images/point_windsuf.png) | [example-3](images/point_thick.png) |
+
+|  City View in Glass Style with Shard Density = 1       | City View in Glass Style with Shard Density = 8          |
+| :---:             | :---:             | :---:            |
+|![example-1](images/cityview_glass.png) | ![example-2](images/cityview_glass_thick.png)|
+
+
+Changing the stroke thickness, dot sizes, and shard densities result in images with varying details and levels of abstraction. 
+
+<p align="center"> <img src="images/highlight_color.png" /> </p>
+
+Click on one of the colours in the main colour theme highlights that color.
 
 ## Evaluations
 
@@ -96,7 +119,27 @@ Different type of images are tested to see its ability to transform the art styl
 
 ### Feature 2 Evaluation
 
-Add description
+**Reducing Noise:**
+The texture of an image can introduce noise, which is often emphasised by the edge detector. For example, the surfboard image has a grainy texture which led to noise.
+
+<p align="center"> <img src="images/surf_noise.png" /> </p>
+
+An imguided filter is applied to smooth the image while preserving sharp edge structures. To prevent faint edges being detected by the Canny edge detector and clutter the art, the default threshold is manually adjusted (strictThresh = defaultThres * 2.5), so that only primary outlines are drawn.
+
+**Making image more Painting-like:**
+Digital pixels are too perfect for art. To make the results more similar to real-life painting, K-means clustering helps identify the main colors, which replicates how a painter mixes a limited palette rather than using the infinite gradients of a raw digital file.
+
+| Windsurf with exact pixel colors        | Windsurf with k-means colors      | 
+| :---:             | :---:             | 
+|![example-1](images/real_color.png) | ![example-2](images/color_k.png)|
+
+For the Pointillism style, real life artists have varying paint sizes and the colors and location of those dots are often non-uniform. Therefore the locations and the colors of the dots are slightly randomised. The size of the dots is different too in order to give a more organic feel. 
+In the Voronoi stained glass style, circshift function is used to slightly offset the shards to mimick the minor misalignments found in physical glasswork.
+
+**Limitations**
+
+High-resolution images (4K+) significantly increase render times for the Pointillism and Voronoi styles due to the amount of point in polygon and randomisation calculations. In addition, the Voronoi method uses random seeds, which means it distributes shards uniformly across the image where in a real stained-glass window, an artist would put small, detailed pieces around a face and larger pieces in the sky. The current system treats the sky and the subject with the same "shard density".
+
 
 ## Individual Reflection
 
@@ -113,3 +156,11 @@ After struggling with Canny edge detection + morphological closing, I switched t
 
 
 ### Gabriela Lee:
+
+I was working on **Lab 5** and **Challenge 4: Artify photographs". I also attempted most of the challenges in Lab 5. My design focused on visual intuition and realism. I focused on identifying the key features of real paintings, such as the varied brush sizes and replicate them through algorithm logic.
+
+I have learnt that tuning optimal thresholds for edge detectors is as much an art as a science, different lighting conditions can signficantly changes it. In addition, implementing robust edge detection is significantly harder than I thought, especially in images with overlapping subjects and low-contrast boundaries. 
+
+I also learnt that the algorithm efficiency really matters in image processing. Time complexity can increase hugely when the image has high resolution. I have made the mistake of using nested for loops for pixel-level calculations and not compressing the iamge for complex comptuation. This led to several UI freezes. I also attempted to implement a 3D relief graph; however, I eventually scrapped this feature, realizing that while technically interesting, it added little functional or aesthetic value to the user’s artistic experience 
+
+If I were to imrprove this project, I would implement advanced image compression to enhance performance further. I would also use a CNN to perform Neural Style Transfer so that the system can learn specific artistic styles with image database and applies them into original image.
