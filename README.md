@@ -69,29 +69,25 @@ The Voronoi stained glass style features coloured glass pieces arranged in patte
 The left image demonstrates the ability to suppress the light background noise and detect the card and the object. The right image demonstrates the **multi-object detection** and the ability to **handle the rotation**. More than one non-card objects are inspected using tabs on the right panel.
 
 
-|  Surfboard in Comic Style       | Surfboard in Pointillism         | Surfboard in Glass Style     | 
-| :---:             | :---:             | :---:            |
-|![example-1](images/comic_result.png) | ![example-2](images/point_result.png)|
-[example-3](images/glass_result.png) |
+| Surfboard Comic Style | Surfboard Pointillism | Surfboard Glass Style |
+| :---: | :---: | :---: |
+| ![example-1](images/comic_result.png) | ![example-2](images/point_result.png) | ![example-3](images/glass_result.png) |
 
-|  City View in Comic Style       | City View in Pointillism         | City View in Glass Style     | 
-| :---:             | :---:             | :---:            |
-|![example-1](images/city_comic.png) | ![example-2](images/city_dots.png)|
-[example-3](images/city_glass.png) |
+| City View Comic Style | City View Pointillism | City View Glass Style |
+| :---: | :---: | :---: |
+| ![example-1](images/city_comic.png) | ![example-2](images/city_dots.png) | ![example-3](images/city_glass.png) |
 
 <p align="center"> <img src="images/portrait_dots.png" /> </p>
 
 Different type of images are tested to see its ability to transform the art style.
 
-|  Surfboard in Comic Style with stroke thickness = 2       |  Surfboard in Comic Style with stroke thickness = 7          | Surfboard in Pointillism Style with dot size = 2     | Surfboard in Pointillism Style with dot size = 8      |
-| :---:             | :---:             | :---:            |
-|![example-1](images/comic_result.png) | ![example-2](images/comic_thick.png)|
-[example-3](images/point_windsuf.png) | [example-3](images/point_thick.png) |
+| Surfboard Comic (Size 2) | Surfboard Comic (Size 7) | Surfboard Pointillism (Size 2) | Surfboard Pointillism (Size 8) |
+| :---: | :---: | :---: | :---: |
+| ![example-1](images/comic_result.png) | ![example-2](images/comic_thick.png) | ![example-3](images/point_windsuf.png) | ![example-4](images/point_thick.png) |
 
-|  City View in Glass Style with Shard Density = 1       | City View in Glass Style with Shard Density = 8          |
-| :---:             | :---:             | :---:            |
-|![example-1](images/cityview_glass.png) | ![example-2](images/cityview_glass_thick.png)|
-
+| City View Glass (Density 1) | City View Glass (Density 8) |
+| :---: | :---: |
+| ![example-1](images/cityview_glass.png) | ![example-2](images/cityview_glass_thick.png) |
 
 Changing the stroke thickness, dot sizes, and shard densities result in images with varying details and levels of abstraction. 
 
@@ -157,7 +153,7 @@ After struggling with Canny edge detection + morphological closing, I switched t
 
 ### Gabriela Lee:
 
-I was working on **Lab 5** and **Challenge 4: Artify photographs". I also attempted most of the challenges in Lab 5. My design focused on visual intuition and realism. I focused on identifying the key features of real paintings, such as the varied brush sizes and replicate them through algorithm logic.
+I was working on **Lab 5** and **Challenge 4: Artify photographs**. I also attempted most of the challenges in Lab 5. My design focused on visual intuition and realism. I focused on identifying the key features of real paintings, such as the varied brush sizes and replicate them through algorithm logic.
 
 I have learnt that tuning optimal thresholds for edge detectors is as much an art as a science, different lighting conditions can signficantly changes it. In addition, implementing robust edge detection is significantly harder than I thought, especially in images with overlapping subjects and low-contrast boundaries. 
 
