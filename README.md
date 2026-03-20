@@ -32,7 +32,25 @@ Full iterative processes can be accessed in `/Challenges/test` folder.
 
 ### Feature 2: Artify Photographs
 
-Description
+This program allows users to upload any standard image and artify it into three distinct styles: Comic Book, Pointillism, and Stained Glass. It allows us to explore how design and technology intersect.
+
+**Preprocessing**
+Before any artistic style is applied, some pre-processing and analysis are performed. To reduce noise, imguided filter is applied to smooth the image whilst preserving edge structures. For example in the surfboard image, the texture is grainy so the smoothing filter helps reduce the noise. To make the results more similar to real-life painting, K-means clustering helps identify the main theme colours, since paint colours are barely exactly the same as pixels. 
+
+To make the application more interactive, a dynamic palette was implemented. By clicking on a specific color in the main theme section, the image will be converted into a grayscale (rgb2gray + imadjust) image and only keep the selected cluster's pixels in colour. 
+
+**📔 Comic Book Style**
+The Comic Book Style focuses on bold colours and heavy ink outlines. Canny edge detection is used to detect the outlines. To prevent the lines being too noisy and only focus on main outlines, the default threshold is manually adjusted (strictThresh = defaultThres * 2.5). Morphological opening (bwareaopen) is then applied to simulate hand-drawn ink and dilation (imdilate) with a disk-shapred structuring element to give the lines variable thickness based on user input. These outlines are then converted to pure black. 
+
+**🟡 Pointillism Style**
+The Pointillism style is one of the most famous style from the Neo-Impressionism movement. It paints with distinct dots. So this style renders the image as a series of distinct dots (120, 000). The dots are placed randomly (randi) and their colors are added a slight random shift (colorShift). The color dots have varying sizes in a specific ratio (5:3:2) to simulate a real artistic switching between large background brushes and fine detail brushes. 
+
+**🪟 Voronoi Stained Glass Style**
+The Voronoi Stained Glass style features coloured glass pieces arranged in patterns. Voronoi tessellation is used to divide a space into region based on distance to a specific group of seeds. "Seeds" are scattered across the image and the bwdist (Distance Transform) function is used to compute which seed is closest to every pixel and divides the image into clean, geometric polygons.
+
+Since it is computationally expensive to calculate millions of distances, the image is scaled down to a maxDim of 1000 pixelss for the Voronoi math, and it is scaled back up using imresize with the nearest neighbor setting. Since real glass has some physical imperfection, circshift function is used to slightly offset the shards. The polygon boundaries are detected and a charcoal-colored dilation is applied to thicken these edges so they look like the lead strips that seperate pieces of stained glass.
+
+
 
 ## Setup & Requirements
 
@@ -50,8 +68,13 @@ Description
 
 The left image demonstrates the ability to suppress the light background noise and detect the card and the object. The right image demonstrates the **multi-object detection** and the ability to **handle the rotation**. More than one non-card objects are inspected using tabs on the right panel.
 
-++ Feature 2 result and images
 
+| Example 1        | Example 2         | Example 3      | 
+| :---:             | :---:             | :---:            |
+|![example-1](images/comic_result.png) | ![example-2](images/point_result.png)|
+[example-3](images/glass_result.png) |
+
+Different type of images are tested to see its ability to transform the art style. The final image depends on 
 
 ## Evaluations
 
