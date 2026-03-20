@@ -254,13 +254,17 @@ title({char(label), num2str(max(score),2)}); % label object
 ```
 
 > Use the webcam to try to recognize different objects.  Also try to find the accuracy and speed of recogniture for different networks.
->
-> Modify this code so that you capture and recognize object in a continous loop.
 
 **_Example outputs from the webcam detection:_**
 <p align="center"> <img src="images/task6-1.png" /> </p>
 <p align="center"> <img src="images/task6-2.png" /> </p>
 <p align="center"> <img src="images/task6-3.png" /> </p>
+
+> Modify this code so that you capture and recognize object in a continous loop.
+
+<p align="center"> <img src="images/task6-loop.png" /> </p>
+
+For continuous loop, `while true` loop is applied with `pause(1.5)` time constraint to allow reasonable time to check the classification result before the next frame is captures and processed.
 
 
 You may also want to read and explore these online documents that accompany Matlab:

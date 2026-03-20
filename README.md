@@ -5,7 +5,7 @@ Link to lab logbooks: [🔗 Lab 5](/Lab5-Segmentation/README.md), [🔗 Lab 6](/
 
 ## Project Overview
 
-Overview of both challenges: maybe connect two somehow?
+<p align="center"> <img src="images/main-launcher.png" /> </p>
 
 ### Feature 1: Object Size Measurement
 
@@ -17,11 +17,11 @@ Image is pre-processed using techniques learning in Labs: Contrast enhancement u
 
 **💳 Credit Card Detection**
 
-Connected regions are analysed using `regionprops` of `cc` element of the image. The card is identified by its aspect ratio with tolerance to slight distortion. 
+Connected regions are analysed using `regionprops` of `cc` element of the image. The card is identified by its aspect ratio with tolerance to slight distortion. Also its rectangular solidity is determined by extent value threshold of 0.88.
 
 **📏 Corner Detection and Straightening**
 
-The card region is rotated using the `Orientation` property, and then mapped using Harris corner detection. Harris corner detection is applied and then four corners are selected geometrically from each quadrant. 
+The card region is rotated using the `Orientation` property, and then mapped using Harris corner detection. Harris corner detection is applied and then four corners are selected geometrically from each quadrant. Additional geometric logic deals with round card corners and ensures that staircase noises are not selected.
 
 **🧸 Object Measurement**  
 
@@ -29,6 +29,7 @@ The remaining non-card region in the binarised image is taken as the object. The
 
 Full iterative processes can be accessed in `/Challenges/test` folder. 
 
+---
 
 ### Feature 2: Artify Photographs
 
@@ -54,10 +55,9 @@ Since it is computationally expensive to calculate millions of distances, the im
 
 ## Setup & Requirements
 
-**Required toolbox and equipment:** Image Processing Toolbox, Computer Vision Toolbox
+* **Required toolbox and equipment:** Image Processing Toolbox, Computer Vision Toolbox
 
-* For the feature 1, run `main.m` in the `/Challenges/object-size-final` folder
-* For the feature 2, 
+* Run `launcher.m` in Challenges folder.
 
 
 ## Results & Demonstrations
@@ -103,6 +103,13 @@ Add description
 _Each member provides a person statement declaring what you personally have contributed to the project, a reflection section on what you have learned, reasons for your design decisions, mistakes you have made and what you would do differently if you were to do this again._
 
 ### Yujeong Seo:
+
+I took responsibility for **Lab 6** and **Challenge 1: object size measurement** using credit card. Through this module and project, I learned how we process the visual elements is underpinned by mathematical operations, such as image intensity transforms, spatial filtering, and morphological operations. Also, I observed how small decisions and combination of techniques can produce significantly different results for same images.
+
+For the design, I prioritised communicating the decision process intuitively rather than just outputting the numerical measurement results. It included decisions like marking detected card corners and displaying both the cropped binarised and colour images to support the logic. 
+
+After struggling with Canny edge detection + morphological closing, I switched the method to contrast enhancement followed by Otsu binarisation, which proved more robust in separating the objects. However, as this approach would fail for indifferent brightnesses, I would explore a more reliable image processing method if I would do it again. More clearer segmentation of objects would also lay better groundwork for extending the system to live webcam measurement, which was discarded due to the difficulty of maintaining a controlled background real time.
+
 
 
 ### Gabriela Lee:
